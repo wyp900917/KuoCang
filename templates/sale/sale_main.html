@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="/static/js/active.js"></script>
+    <title>销售主页</title>
+</head>
+<body style="text-align: center; background-color: #dcdcdc">
+    <div style="margin: 50px auto">
+        销售员：<span style="font-weight: bold; font-family: '微软雅黑', 'Segoe UI', san-serif; color: #ff0000; margin-right: 50px;">{{ seller_name }}</span>
+        <a href="/sale_exit" style="color: #8b4513">退出</a><br><br>
+    </div>
+    <div style="margin: 50px auto">
+        <span style="vertical-align: top">请输入追溯码：</span><textarea id="trace_codes" cols="20" rows="3"></textarea>
+        <span id="trace_tip" style="color: #ff0000; font-size: 12px; font-style: italic; vertical-align: top">12位</span><br><br>
+        <input type="submit" value="提交激活" onclick="active()"><br>
+    </div>
+    <div id="result" style="text-align: center; margin-top: 30px"></div>
+</body>
+</html>

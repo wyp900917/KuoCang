@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="/static/js/report_box.js"></script>
+    <title>缺箱上报返回结果页面</title>
+</head>
+<body style="text-align: center; background-color: #dcdcdc">
+    <div style="margin: 50px auto">
+        收货人：<span style="font-weight: bold; font-family: Arial, Helvetica, sans-serif; color: #ff0000">{{ receipt_name }}</span>
+        公司代号：<span style="font-weight: bold; font-family: Arial, Helvetica, sans-serif; color: #ff0000">{{ company_id }}</span>
+        运单号：<span style="font-weight: bold; font-family: Arial, Helvetica, sans-serif; color: #ff0000">{{ transport_id }}</span>
+    </div>
+    <div style="margin: 50px auto">
+        <input type="submit" value="提交上报" onclick="report_up()"><br>
+    </div>
+    <div style="margin: 50px auto">
+        <table border="1" align="center" style="width: 400px">
+            <tbody>
+                <tr>
+                    <td colspan="2"><span style="font-weight: bold">运单号：<span style="color: #ff0000">{{ transport_id }}</span></span></td>
+                </tr>
+                {% if not result %}
+                    <tr>
+                        <td colspan="2"><span style="color: #ff0000">此运单号无箱号信息</span></td>
+                    </tr>
+                {% else %}
+                    <tr style="font-weight: bold; font-size: 13px">
+                        <td>箱号</td>
+                        <td>操作</td>
+                    </tr>
+                    {% for package in result %}
+                        <tr style="font-size: 13px">
+                            <td>{{ package.barcode }}</td>
+                            {% if package.state != 0 %}
+                                <td><label>撤销<input value = '{{ package.pid }}' type="checkbox" name="checkbox_0" checked="checked" disabled="disabled"></label></td>
+                            {% else %}
+                                <td><label>撤销<input value = '{{ package.pid }}' type="checkbox" name="checkbox_1"></label></td>
+                            {% end %}
+                        </tr>
+                    {% end %}
+                {% end %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

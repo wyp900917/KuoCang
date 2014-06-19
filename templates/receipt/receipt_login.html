@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="/static/js/validate.js"></script>
+    <title>收货登录</title>
+</head>
+<body style="text-align: center; background-color: #dcdcdc">
+    <div style="margin: 50px auto; font-family: '微软雅黑', 'Segoe UI', san-serif; font-size: 24px; font-weight: bold; font-style: italic">
+        收货请先登录...
+    </div>
+    <form action="/receipt_login" method="post" onsubmit="return check(this)">
+        {% raw xsrf_form_html() %}
+        <div style="margin: 100px auto">
+            <label>收 货 人：<input type="text" id="text_1" name="receipt_name"  /></label><span id="validate_1" style="color: #ff0000; font-size: 12px; font-style: italic"></span><br><br>
+            <label>公司代号：<input type="text" id="text_2" name="company_id" /></label><span id="validate_2" style="color: #ff0000; font-size: 12px; font-style: italic"></span><br><br>
+            <input type="submit" value="登录" />
+        </div>
+    </form>
+</body>
+</html>

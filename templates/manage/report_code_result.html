@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="/static/js/report_up.js"></script>
+    <title>上报返回结果页面</title>
+</head>
+<body style="text-align: center; background-color: #dcdcdc">
+    <div style="margin: 50px auto">
+        收货人：<span style="font-weight: bold; font-family: Arial, Helvetica, sans-serif; color: #ff0000">{{ receipt_name }}</span>
+        公司代号：<span style="font-weight: bold; font-family: Arial, Helvetica, sans-serif; color: #ff0000">{{ company_id }}</span>
+        运单号：<span style="font-weight: bold; font-family: Arial, Helvetica, sans-serif; color: #ff0000">{{ transport_id }}</span>
+    </div>
+    <div style="margin: 50px auto">
+        <input type="submit" value="提交上报" onclick="report_up()"><br>
+        <input type="hidden" id="company_id" value="{{ company_id }}">
+        <input type="hidden" id="reporter" value="{{ receipt_name }}">
+    </div>
+    <div style="margin: 50px auto">
+        {% for (barcode,trace_codes) in result.items() %}
+            <table border="1" style="float: left; width: 300px; margin: 0 0 50px 100px">
+                <tbody>
+                    <tr>
+                        <td colspan="2"><span style="font-weight: bold">箱号：<span style="color: #ff0000">{{ barcode }}</span></span></td>
+                    </tr>
+                    {% if not trace_codes %}
+                        <tr>
+                            <td colspan="2"><span style="color: #ff0000">此箱号无单品信息</span></td>
+                        </tr>
+                    {% elif not trace_codes[0] %}
+                        <tr>
+                            <td colspan="2"><span style="color: #ff0000">无此箱号或该箱已上报丢失</span></td>
+                        </tr>
+                    {% else %}
+                        <tr style="font-weight: bold; font-size: 13px">
+                            <td>单品追溯码</td>
+                            <td>操作</td>
+                        </tr>
+                        {% for tc in trace_codes %}
+                            <tr style="font-size: 13px">
+                                <td>{{ tc.tracecode }}</td>
+                                {% if tc.state != 0 %}
+                                    <td><label>丢失<input value = '{{ tc.tracecode }}' type="checkbox" name="checkbox_0" checked="checked" disabled="disabled"></label></td>
+                                {% else %}
+                                    <td><label>丢失<input value = '{{ tc.tracecode }}' type="checkbox" name="checkbox_1"></label></td>
+                                {% end %}
+                            </tr>
+                        {% end %}
+                    {% end %}
+                </tbody>
+            </table>
+        {% end %}
+    </div>
+</body>
+</html>

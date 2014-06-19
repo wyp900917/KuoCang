@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>上报查看页面</title>
+</head>
+<body style="text-align: center; background-color: #dcdcdc">
+    <div style="margin: 50px auto; font-weight: bold; font-size: 24px">
+        收货人：{{ reporter }}
+    </div>
+    <div style="margin: 50px auto">
+        {% if not result %}
+            <span style="color: #ff0000; font-size: 24px; font-weight: bold">您尚未上报任何产品信息...</span>
+        {% else %}
+            <span style="color: #ff0000; font-size: 20px; font-weight: bold">上报信息</span>
+            <table border="1" align="center" style="width: 700px">
+                <tbody>
+                    <tr style="font-size: 16px; font-weight: bold">
+                        <td>追溯码</td>
+                        <td>公司代号</td>
+                        <td>所属运单号</td>
+                        <td>所属箱号</td>
+                        <td>上报时间</td>
+                        <td>撤销</td>
+                    </tr>
+                    {% for item in result %}
+                        <tr style="font-size: 14px">
+                            <td>{{ item.tracecode }}</td>
+                            <td>{{ item.companyid }}</td>
+                            <td>{{ item.transportid }}</td>
+                            <td>{{ item.barcode }}</td>
+                            <td>{{ item.time }}</td>
+                            <!--<td><label><input type="checkbox" value="{{ item.tracecode }}" name="checkbox_0"></label></td>-->
+                            <td><a href="/report_revoke/{{ item.rid }}" onclick="return confirm('确认撤销吗？')">撤销</a></td>
+                        </tr>
+                    {% end %}
+                </tbody>
+            </table>
+        {% end %}
+    </div>
+    <div style="margin: 20px auto">
+        <input type="button" value="返回" onclick="javascript:history.go(-1);">
+    </div>
+</body>
+</html>

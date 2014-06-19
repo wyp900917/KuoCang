@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="/static/js/security_check.js"></script>
+    <title>防伪查询主页面</title>
+</head>
+<body style="text-align: center; background-color: #dcdcdc">
+    <div style="margin: 50px auto; font-family: '微软雅黑', 'Segoe UI', san-serif; font-size: 24px; font-weight: bold; font-style: italic">
+        欢迎使用防伪查询功能...
+    </div>
+    <div style="margin: 50px auto">
+        <label>请输入追溯码：<input type="text" id="trace_code" name="trace_code" ></label><span id="trace" style="color: #ff0000; font-size: 12px; font-style: italic">12位</span><br><br>
+        <label>请输入防伪码：<input type="text" id="security_code" name="security_code" ></label><span id="security" style="color: #ff0000; font-size: 12px; font-style: italic">6位</span><br><br>
+        <input type="submit" value="提交查询" onclick="security_check()"><br><br>
+    </div>
+    <div id="result" style="margin: 20px auto; color: #ff0000; font-weight: bold"></div>
+</body>
+</html>

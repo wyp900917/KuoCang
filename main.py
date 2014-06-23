@@ -13,6 +13,7 @@ from tornado.options import options, define
 import receipt_handler
 import manage_handler
 import sale_handler
+import bi_handler
 import securityCheck_handler
 import conn_db
 import table_pro
@@ -44,7 +45,10 @@ class Application(tornado.web.Application):
             (r"/manage/receive", manage_handler.ReceiveReportHandler),
             (r"/manage/receive_box", manage_handler.ReceiveBoxReportHandler),
             (r"/manage/report", manage_handler.ReportHandler),
-            (r"/manage/report_box", manage_handler.ReportBoxHandler)
+            (r"/manage/report_box", manage_handler.ReportBoxHandler),
+            (r"/bi_login", bi_handler.BILoginHandler),
+            (r"/bi_main", bi_handler.BIMainHandler),
+            (r"/bi_exit", bi_handler.BIExitHandler)
         ]
         settings = dict(
             template_path=TEMPLATE_PATH,
